@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "80fb6e15-8f5a-495e-8b23-a67a47442ca7",
+		"name": "End to End Operations for SMS",
+		"description": "adding new student\nadding technical skiils for the added student",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "adding student",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"VerifyStatusCode\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"simran\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"first_name\": \"simran\",\r\n    \"middle_name\": \"sam\",\r\n    \"last_name\": \"smi\",\r\n    \"date_of_birth\": \"12/05/1992\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/{{resource}}/",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"{{resource}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adding technical skills to student",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"language\": [\r\n    \"java\",\r\n    \"php\"\r\n  ],\r\n  \"yearexp\": \"5\",\r\n  \"lastused\": \"2019\",\r\n  \"st_id\": \"156668\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://thetestingworldapi.com/api/technicalskills/156665",
+					"protocol": "http",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"technicalskills",
+						"156665"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://thetestingworldapi.com/api/studentsDetails/{{Id}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 200ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(300);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://thetestingworldapi.com/api/studentsDetails/{{Id}}",
+					"protocol": "http",
+					"host": [
+						"thetestingworldapi",
+						"com"
+					],
+					"path": [
+						"api",
+						"studentsDetails",
+						"{{Id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
